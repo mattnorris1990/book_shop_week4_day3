@@ -16,4 +16,21 @@ def delete_book(id):
     book_repository.delete(id)
     return redirect('/')
 
-    
+@books_blueprint.route("/addbook")
+def add_book_form():
+    authors = author_repository.select_all()
+    return render_template('books/new-book.html', authors=authors)
+
+@books_blueprint.route("/addbook", methods=['POST'])
+def add_book():
+    title = request.form['book_name']
+    author = request.form['author_id']
+    author_object = author_repository.select(author)
+
+    book_object = Book(title, author_object)
+
+    book_repository.save(book_object)
+
+    return redirect('/')
+
+
