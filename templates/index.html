@@ -5,10 +5,10 @@
 {% for book in books %}
 <div class = "book_item">
     <p class = "book_title">
-        {{ book.title }} 
+        <a href="/{{book.id}}"> {{ book.title }} </a>
     </p>
     <p>
-       by {{ book.author.name }}
+        by {{ book.author.name }}
     </p>
     <form class="delete-form" action="/{{book.id}}/delete" method="POST">
         <button>

@@ -33,4 +33,29 @@ def add_book():
 
     return redirect('/')
 
+@books_blueprint.route('/<id>')
+def show_book(id):
+    book = book_repository.select(id)
+    return render_template('books/show-book.html', book = book)
+
+# BELOW DOES NOT WORK
+
+@books_blueprint.route('/<id>/edit')
+def edit_book(id):
+    book = book_repository.select(id)
+    author_list = author_repository.select_all()
+    return render_template('/books/edit.html', book = book, authors = author_list)
+
+@books_blueprint.route('/<id>', methods = ["POST"])
+def edit_book_form(id):
+    title = request.form['book_title']
+    author = request.form['author_id']
+    author_object = author_repository.select(author)
+
+    book_object = Book(title, author_object, id)
+
+    book_repository.update(book_object)
+
+    return redirect('/')
+
 

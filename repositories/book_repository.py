@@ -29,7 +29,7 @@ def select(id):
 
     sql = "SELECT * from books WHERE id = %s"
     values = [id]
-    results = run_sql[sql, values]
+    results = run_sql(sql, values)
 
     if len(results) > 0:
         result = results[0]
