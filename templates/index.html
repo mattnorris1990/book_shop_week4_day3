@@ -3,9 +3,19 @@
 {% block content %}
 
 {% for book in books %}
-
-{{ book.title }}
-
+<div class = "book_item">
+    <p class = "book_title">
+        {{ book.title }} 
+    </p>
+    <p>
+       by {{ book.author.name }}
+    </p>
+    <form class="delete-form" action="/{{book.id}}/delete" method="POST">
+        <button>
+            delete book
+        </button>
+    <hr>
+</div>
 {% endfor %}
 
 {% endblock %}

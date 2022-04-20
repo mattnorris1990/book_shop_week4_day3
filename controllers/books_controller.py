@@ -10,3 +10,10 @@ books_blueprint = Blueprint("books", __name__)
 def books():
     books = book_repository.select_all()
     return render_template("index.html", books = books)
+
+@books_blueprint.route("/<id>/delete", methods = ['POST'])
+def delete_book(id):
+    book_repository.delete(id)
+    return redirect('/')
+
+    
